@@ -85,13 +85,13 @@ public class MainController {
 
         for (Payment partner : partnerList) {
             for (Payment rbs : rbsList) {
-                if ( rbs.getAccount().equals(partner.getAccount()) && rbs.getSum() == partner.getSum()) {
+                if ( rbs.getSum() == partner.getSum() && rbs.getAccount().contains(partner.getAccount())) {
                     rbs.setExist(true);
                     partner.setExist(true);
                 }
             }
         }
-        notMatchedRBS = rbsList.stream().filter(rbs -> !rbs.isExist()).collect(Collectors.toList());
-        notMatchedPartner = partnerList.stream().filter(partner -> !partner.isExist()).collect(Collectors.toList());
+        notMatchedRBS = rbsList.stream().filter(rbs -> !rbs.isExist() && !(rbs.getAccount() == null || rbs.getSum() == 0)).collect(Collectors.toList());
+        notMatchedPartner = partnerList.stream().filter(partner -> !partner.isExist() && !(partner.getAccount() == null || partner.getSum() == 0)).collect(Collectors.toList());
     }
 }

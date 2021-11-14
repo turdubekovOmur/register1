@@ -43,7 +43,7 @@ public class GreenkaPartnerService implements Readable {
                 list.add(partner);
             }
         }catch (NullPointerException | IllegalStateException e){
-            log.error("Пустое поле или строка в xlsx фале! {}", e);
+            log.error("Пустое поле или строка в xlsx фале! {}", e.getMessage());
         }
         return list;
     }

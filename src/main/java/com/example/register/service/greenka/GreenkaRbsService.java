@@ -70,7 +70,7 @@ public class GreenkaRbsService implements Readable {
                 list.add(rbs);
             }
         } catch (NullPointerException | NumberFormatException | ArrayIndexOutOfBoundsException n) {
-            n.printStackTrace();
+            log.error("Exception: {}", n.getMessage());
         }
 
         return list;

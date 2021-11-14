@@ -31,11 +31,8 @@ public class Pay24PartnerService implements Readable {
                 Row row = worksheet.getRow(i);
                 Payment partner = new Payment();
 
-                log.info("Парсинг даты");
                 String date = row.getCell(0).getStringCellValue();
-                log.info("Парсинг реквизита");
                 String account = row.getCell(5).getStringCellValue();
-                log.info("Парсинг суммы");
                 double sum = row.getCell(6).getNumericCellValue();
 
                 partner.setDate(date);

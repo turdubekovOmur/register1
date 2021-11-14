@@ -59,9 +59,9 @@ public class QuickPayRbsService implements Readable {
                 String[] operation = row.getCell(4).toString().split("транзакции:");
                 int size = operation.length;
                 if (size > 1) {
-                    String[] txn = operation[0].split("\\.");
-                    String[] test = txn[txn.length - 2].split(" ");
-                    String account = test[test.length - 1];
+                    String[] transact = operation[1].split("\\.");
+                    String account = transact[0];
+                    account = account.replaceAll("\\u00a0","");
                     rbs.setAccount(account);
                 } else {
                     rbs.setAccount(Arrays.toString(operation));
@@ -70,7 +70,7 @@ public class QuickPayRbsService implements Readable {
                 list.add(rbs);
             }
         } catch (NullPointerException | NumberFormatException | ArrayIndexOutOfBoundsException n) {
-            n.printStackTrace();
+           log.error("Exception: {}", n.getMessage());
         }
 
         return list;
